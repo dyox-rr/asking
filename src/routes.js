@@ -12,7 +12,16 @@ routes.get('/question', (req, res) => {
 
 routes.post('/question/store', (req, res) => {
     let { question, description } = req.body;
-    console.log(question, description);
+    Question.create({
+        question,
+        description
+    }).then(() => {
+        console.log('Question was added.');
+        res.redirect('/question');
+    }).catch(e => {
+        console.error(e);
+        res.redirect('/');
+    });
 });
 
 
