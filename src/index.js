@@ -5,9 +5,12 @@ const PORT = 3000;
 const routes = require('./routes');
 
 /* Configurations */
+app.use(express.json());
+app.use(express.urlencoded());
 app.use(express.static('public'));
 app.use(routes);
 app.set('view engine', 'ejs');
+
 
 /* Database connection */
 Connection

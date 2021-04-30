@@ -15,17 +15,17 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-12 col-md-8">
 
-                    <form action="" method="post">
+                    <form action="/question/store" method="post">
                         <div class="mb-3">
                             <label for="question" class="form-label">Question</label>
                             <input placeholder="what is the best framework for PHP?" 
-                            type="text" class="form-control" id="question" aria-describedby="questionHelp">
+                            type="text" class="form-control" name="question" id="question" aria-describedby="questionHelp">
                             <div id="questionHelp" class="form-text">Your question should be short and to the point.
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
-                            <textarea name="description" id="description" class="form-control" placeholder="Describe your prob"></textarea>
+                            <textarea name="description" id="description" class="form-control"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
