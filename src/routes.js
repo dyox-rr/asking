@@ -1,5 +1,6 @@
 const express = require('express');
 const routes = express.Router();
+const Question = require('../models/Question');
 
 routes.get('/', (req, res) => {
     res.render('questions/index')
