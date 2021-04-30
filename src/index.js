@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const Connection = require('../database/Connection');
 const PORT = 3000;
 const routes = require('./routes');
 
@@ -7,6 +8,15 @@ const routes = require('./routes');
 app.use(express.static('public'));
 app.use(routes);
 app.set('view engine', 'ejs');
+
+/* Database connection */
+Connection
+.authenticate()
+.then(() => {
+    console.log('database connected;');
+}).catch(e => {
+    console.error(e);
+});
 
 
 
