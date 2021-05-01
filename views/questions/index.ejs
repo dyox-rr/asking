@@ -18,8 +18,8 @@
 
             <div class="row">
                 <% questions.forEach(question => { %>
-                    <div class="col-12 col-md-6 my-2">
-                        <div class="card">
+                    <div class="col-12 col-md-3 my-2" >
+                        <div class="card shadow border-0" >
                             <div class="card-body">
                                 <%= question.question %> 
                                 <a href="/questions/show/<%= question.id %> " class="btn btn-primary btn-sm float-end">

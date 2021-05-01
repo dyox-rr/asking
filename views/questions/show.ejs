@@ -5,7 +5,7 @@
 
             <div class="row d-flex justify-content-center">
                 <div class="col-12 col-md-8">
-                    <h2 class="my-4">
+                    <h2 class="mt-4">
                         Showing Question
                     </h2>
                 </div>
@@ -18,19 +18,71 @@
                     <div class="card rounded shadow">
                         <div class="card-header bg-primary text-white ">
                             <%= question.question %>
-                            <a href="#" class="btn btn-sm text-white fs-5 mx-auto"><i class='bx bx-trash'></i></a>
                         </div>
                         <div class="card-body">
-                            <%= question.description %> 
+                            <%= question.description %>
                         </div>
                     </div>
-                   
+
+                </div>
+            </div>
+
+
+
+            <div class="row my-4 d-flex justify-content-center">
+                <div class="col-12 col-md-8">
+                    <h2>Answer
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn text-success fs-4" data-bs-toggle="modal"
+                            data-bs-target="#modalNewQuestion">
+                            <i class='bx bx-comment-add'></i>
+                        </button>
+                    </h2>
+
+                    <div class="row">
+                        <% answers.forEach(answer=> { %>
+                            <div class="col-12 col-md-4">
+                                <div class="card my-2 shadow border-0">
+                                    <div class="card-body">
+                                        <%= answer.body %>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }) %>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="modalNewQuestion" tabindex="-1" aria-labelledby="modalNewQuestionLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <form action="/answer" method="POST">
+                                <h5 class="modal-title" id="modalNewQuestionLabel">New answer 💭</h5>
+                                <textarea name="body" id="body" class="form-control"
+                                    placeholder="Write your answer here briefly and quickly."></textarea>
+                                <input type="text" name="question_id" hidden value="<%= question.id %> ">
+                                <button type="submit" class="btn btn-success btn-sm my-2">Save changes</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
 
 
         </div>
 
-      
 
-        <%- include('../partials/footer')%>
+        <% if (created) { %>
+            <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+            <script src="/js/showMessageSuccess.js"></script>
+            <% } %>
+
+                <%- include('../partials/footer')%>

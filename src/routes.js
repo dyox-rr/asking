@@ -1,6 +1,7 @@
 const express = require('express');
 const routes = express.Router();
 const Question = require('../models/Question');
+const Answer = require('../models/Answer');
 
 routes.get('/', (req, res) => {
     Question.findAll({
@@ -47,12 +48,36 @@ routes.get('/questions/show/:id', (req, res) => {
             id
         }
     }).then(question => {
-        res.render('questions/show', {
-            question
-        })
+        Answer.findAll().then(answers => {
+            let created = req.session.created;
+            req.session.created = false;
+            res.render('questions/show', {
+                question,
+                answers,
+                created
+            })
+        }).catch(e => {
+            console.error(e);
+        });
     }).catch(e => console.error(e));
-    
-})
+});
+
+
+routes.post('/answer', (req, res) => {
+    let { body, question_id } = req.body;
+    Answer.create({
+        body,
+        question_id
+    }).then(() => {
+        console.log('success');
+        req.session.created = true;
+        res.redirect(`/questions/show/${question_id}`);
+    }).catch(e => {
+        console.error(e);
+    });
+});
+
+
 
 
 module.exports = routes;
