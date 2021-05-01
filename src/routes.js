@@ -42,7 +42,10 @@ routes.post('/questions/store', (req, res) => {
 routes.get('/questions/show/:id', (req, res) => {
     let { id } = req.params;
     Question.findOne({
-        raw: true
+        raw: true,
+        where: {
+            id
+        }
     }).then(question => {
         res.render('questions/show', {
             question
